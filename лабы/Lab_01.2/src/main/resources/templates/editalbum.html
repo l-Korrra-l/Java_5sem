@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit album</title>
+</head>
+<body>
+<div class="container">
+    <h1>New album:</h1>
+    <form th:object="${albumform}" method="POST">
+        <p>Title:
+            <input type="text" th:field="*{title}" />
+        </p>
+        <p> Author:
+            <input type="text" th:field="*{author}" />
+        </p>
+        <input class ="button-main-page" type="submit" value="Edit" />
+    </form>
+</div>
+</body>
+</html>

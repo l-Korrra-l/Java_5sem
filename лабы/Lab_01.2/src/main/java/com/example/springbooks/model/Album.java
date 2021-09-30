@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Album {
+
+
+    private int id;
     private String title;
     private String author;
 }

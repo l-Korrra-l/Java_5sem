@@ -19,7 +19,18 @@
     <tr th:each ="album : ${albums}">
       <td th:utext="${album.title}">...</td>
       <td th:utext="${album.author}">...</td>
+
+        <td> <button>
+            <a th:href="'/editalbum/' + ${album.id}">Edit</a>
+        </button>
+        </td>
+        <td>
+            <form th:action="'/deletealbum/' + ${album.id}" method="post">
+                <input type="submit" value="Delete">
+            </form>
+        </td>
     </tr>
+
   </table>
 </div>
 </body>
