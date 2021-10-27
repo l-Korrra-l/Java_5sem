@@ -1,4 +1,4 @@
-package com.example.springbooks.model;
+package com.example.lab_01_v2.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class Album {
     private String title;
     private String author;
+
 }

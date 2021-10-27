@@ -1,4 +1,4 @@
-package com.example.springbooks.model;
+package com.example.lab_01_v2.forms;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Album {
+public class AlbumForm {
     private String title;
     private String author;
 }
