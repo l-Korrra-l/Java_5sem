@@ -3,18 +3,19 @@ package com.example.lab_01_v2.controller;
 import com.example.lab_01_v2.forms.AlbumForm;
 import com.example.lab_01_v2.forms.EditAlbumForm;
 import com.example.lab_01_v2.model.Album;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Controller
+@RequestMapping
 public class AlbumController {
     private static List<Album> albums = new ArrayList<Album>();
     static {
@@ -28,35 +29,39 @@ public class AlbumController {
     @Value("${error.message}")
     private String errorMessage;
 
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/", "/index"})
+    //@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public ModelAndView index(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         model.addAttribute("message", message);
-
+        log.info("/index was called");
         return  modelAndView;
     }
 
-    @RequestMapping(value = {"/allalbums"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/allalbums"})
+    //@RequestMapping(value = {"/allalbums"}, method = RequestMethod.GET)
     public ModelAndView personList(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("albumlist");
         model.addAttribute("albums", albums);
+        log.info("/allalbums was called");
         return modelAndView;
     }
 
-        @RequestMapping(value = {"/addalbum"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/addalbum"})
+    //@RequestMapping(value = {"/addalbum"}, method = RequestMethod.GET)
     public ModelAndView showAddPersonPage(Model model) {
         ModelAndView modelAndView = new ModelAndView("addalbum");
         AlbumForm albumForm = new AlbumForm();
         model.addAttribute("albumform", albumForm);
-
+        log.info("/addalbum Get was called");
         return modelAndView;
     }
 
-    // @PostMapping("/addalbum")
+    @PostMapping("/addalbum")
     // GetMapping("/")
-    @RequestMapping(value = {"/addalbum"}, method = RequestMethod.POST)
+    //@RequestMapping(value = {"/addalbum"}, method = RequestMethod.POST)
     public ModelAndView savePerson(Model model, @ModelAttribute("albumform") AlbumForm albumForm) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("albumlist");
@@ -68,31 +73,31 @@ public class AlbumController {
             model.addAttribute("albums",albums);
             return modelAndView;
         }
-
+        log.info("/allalbum post was called");
         modelAndView.setViewName("addalbum");
         model.addAttribute("errorMessage", errorMessage);
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/delalbum"}, method = RequestMethod.GET)
-    //@GetMapping(value = {"/delalbum"})
+    //@RequestMapping(value = {"/delalbum"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/delalbum"})
     public ModelAndView showDelAlbumPage(Model model){
         ModelAndView modelAndView = new ModelAndView("delalbum");
         AlbumForm albumForm = new AlbumForm();
         model.addAttribute("albumform",albumForm);
-        //log.info("/delalbum GET was called");
+        log.info("/delalbum GET was called");
         return  modelAndView;
     }
 
-    //@PostMapping(value = {"/delalbum"})
-    @RequestMapping(value = {"/delalbum"}, method = RequestMethod.POST)
+    @PostMapping(value = {"/delalbum"})
+    //@RequestMapping(value = {"/delalbum"}, method = RequestMethod.POST)
     public ModelAndView delBook(Model model,
                                 @ModelAttribute("albumform") AlbumForm albumForm){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("albumlist");
         String title = albumForm.getTitle();
         String author = albumForm.getAuthor();
-        //log.info("/delalbum POST was called");
+        log.info("/delalbum POST was called");
 
         if(title!=null && title.length()>0
                 && author != null && author.length()>0){
@@ -112,18 +117,18 @@ public class AlbumController {
         return  modelAndView;
     }
 
-    //@GetMapping(value = {"/editalbum"})
-    @RequestMapping(value = {"/editalbum"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/editalbum"})
+    //@RequestMapping(value = {"/editalbum"}, method = RequestMethod.GET)
     public ModelAndView showEditAlbumPage(Model model){
         ModelAndView modelAndView = new ModelAndView("editalbum");
         EditAlbumForm albumForm = new EditAlbumForm();
         model.addAttribute("albumform",albumForm);
-        //log.info("/editalbum GET was called");
+        log.info("/editalbum GET was called");
         return  modelAndView;
     }
 
-    //@PostMapping(value = {"/editalbum"})
-    @RequestMapping(value = {"/editalbum"}, method = RequestMethod.POST)
+    @PostMapping(value = {"/editalbum"})
+    //@RequestMapping(value = {"/editalbum"}, method = RequestMethod.POST)
     public ModelAndView updateAlbum(Model model,
                                     @ModelAttribute("albumform") EditAlbumForm albumForm){
         ModelAndView modelAndView = new ModelAndView();
@@ -132,7 +137,7 @@ public class AlbumController {
         String author = albumForm.getAuthor();
         String newTitle = albumForm.getNewTitle();
         String newAuthor = albumForm.getNewAuthor();
-        //log.info("/editalbum POST  was called");
+        log.info("/editalbum POST  was called");
 
         if(title!=null && title.length()>0
                 && author != null && author.length()>0
