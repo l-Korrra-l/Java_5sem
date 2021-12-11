@@ -9,7 +9,7 @@ async function logUser(data) {
 }
 
 async function login() {
-    let login = document.getElementById("login").value;
+    let login = document.getElementById("loginn").value;
     let password = document.getElementById("password").value;
     let mes = document.getElementById("message");
     let data = {login: login, password: password};
