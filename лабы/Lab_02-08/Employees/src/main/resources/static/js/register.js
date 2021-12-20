@@ -13,7 +13,7 @@ function validateLoginPass(login, password , email) {
 }
 
 async function regUser(data) {
-    return await fetch("/register", {
+    return await fetch("/registration", {
         method: "POST",
         headers: {
             'content-type': 'application/json'

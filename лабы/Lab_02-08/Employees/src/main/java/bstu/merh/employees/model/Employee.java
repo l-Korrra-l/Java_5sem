@@ -35,7 +35,66 @@ public class Employee {
     @Column(name = "mail")
     private String mail;
 
-    @OneToOne(fetch = FetchType.LAZY)
+//    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Integer company_id;
+
+    //getters
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public Float getSalary() {
+        return salary;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public Integer getCompany_id() {
+        return company_id;
+    }
+
+    //setters
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public void setSalary(Float salary) {
+        this.salary = salary;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setCompany_id(Integer company_id) {
+        this.company_id = company_id;
+    }
 }

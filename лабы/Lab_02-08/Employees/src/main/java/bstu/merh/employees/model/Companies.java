@@ -31,4 +31,22 @@ public class Companies {
     @Column(name = "company_name")
     private String name;
 
+    //getters
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    //setters
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
