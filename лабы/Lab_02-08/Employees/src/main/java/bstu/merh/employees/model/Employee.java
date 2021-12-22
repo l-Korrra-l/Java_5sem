@@ -3,17 +3,14 @@ package bstu.merh.employees.model;
 import java.util.List;
 import javax.persistence.*;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name = "Employees")
 @Getter
 @Setter
 @RequiredArgsConstructor
+@Data
 public class Employee {
 
     @Id
@@ -21,10 +18,10 @@ public class Employee {
     private Long id;
 
     @Column(name = "first_name")
-    private String first_name;
+    private String firstName;
 
     @Column(name = "last_name")
-    private String last_name;
+    private String lastName;
 
     @Column(name = "age")
     private Integer age;
@@ -39,62 +36,16 @@ public class Employee {
     @JoinColumn(name = "company_id")
     private Integer company_id;
 
-    //getters
-    public Long getId() {
-        return id;
-    }
+    //
 
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public Float getSalary() {
-        return salary;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public Integer getCompany_id() {
-        return company_id;
-    }
-
-    //setters
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public void setAge(Integer age) {
+    public Employee(String first_name, String last_name, Integer age, Float salary, String mail, Integer company_id) {
+        this.firstName = first_name;
+        this.lastName = last_name;
         this.age = age;
-    }
-
-    public void setSalary(Float salary) {
         this.salary = salary;
-    }
-
-    public void setMail(String mail) {
         this.mail = mail;
-    }
-
-    public void setCompany_id(Integer company_id) {
         this.company_id = company_id;
     }
+
+
 }

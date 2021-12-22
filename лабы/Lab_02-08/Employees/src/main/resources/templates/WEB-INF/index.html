@@ -7,6 +7,36 @@
 </head>
 <body>
   <h3>index</h3>
-  <h1 th:utext="${message}">..!..</h1>
+  <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Sign Out"/>
+  </form>
+<!--  <h1 th:utext="${message}">..!..</h1>-->
+  <div class="container">
+<!--      users-->
+      <h1>New employee:</h1>
+      <form method="POST">
+          <p>first_name: <input type="text" name="first_name" placeholder="a"/> </p>
+          <p>last name: <input type="text" name="last_name" placeholder="a"/> </p>
+          <p>last name: <input type="number" name="age" placeholder="1"/> </p>
+          <input type="submit" value="Add" />
+      </form>
+  </div>
+  <form method="post" action="filter">
+      <input type="text" name="filter"/>
+      <button type="submit">Find</button>
+  </form>
+  <div class="container">
+      <table class ="container" border="1">
+          <tr>
+              <th><h1>Title</h1></th>
+              <th><h1>Author</h1></th>
+          </tr>
+          <tr th:each ="employee : ${employees}">
+              <td th:utext="${employee.firstName}">...</td>
+              <td th:utext="${employee.lastName}">...</td>
+          </tr>
+
+      </table>
+  </div>
 </body>
 </html>

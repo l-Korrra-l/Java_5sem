@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 //Repository
 public interface UserRoleRepository {
-        //extends JpaRepository<Role, Long> {
+        //extends JpaRepository<Role, Integer> {
     Role findByName(Role name);
 }
