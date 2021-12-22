@@ -11,7 +11,9 @@ import bstu.merh.employees.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -35,6 +37,12 @@ public class MainRestController {
         }
     }
 
+    @GetMapping("/login")
+    public @ResponseBody ModelAndView loginin(Model model) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
+    }
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody AuthRequest authRequest) throws ControllerException
     {
@@ -92,4 +100,5 @@ public class MainRestController {
             throw new ControllerException("getUser", e);
         }
     }
+
 }
