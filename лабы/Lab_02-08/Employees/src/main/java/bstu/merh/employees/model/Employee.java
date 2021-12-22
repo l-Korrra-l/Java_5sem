@@ -33,18 +33,17 @@ public class Employee {
     private String mail;
 
 //    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_id")
-    private Integer company_id;
+//    @JoinColumn(name = "company_id")
+//    private Integer company_id;
 
     //
 
-    public Employee(String first_name, String last_name, Integer age, Float salary, String mail, Integer company_id) {
+    public Employee(String first_name, String last_name, Integer age, Float salary, String mail) {
         this.firstName = first_name;
         this.lastName = last_name;
         this.age = age;
         this.salary = salary;
         this.mail = mail;
-        this.company_id = company_id;
     }
 
 
