@@ -9,6 +9,8 @@ import lombok.*;
 @Table(name = "Employees")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @RequiredArgsConstructor
 @Data
 public class Employee {
