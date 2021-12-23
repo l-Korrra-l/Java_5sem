@@ -69,10 +69,15 @@
             <version>5.5.2</version>
         </dependency>
 <!--        jwt-->
+<!--        <dependency>-->
+<!--            <groupId>io.jsonwebtoken</groupId>-->
+<!--            <artifactId>jjwt-impl</artifactId>-->
+<!--            <version>0.10.7</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>0.10.7</version>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
         </dependency>
 <!--        tomcat-->
         <dependency>

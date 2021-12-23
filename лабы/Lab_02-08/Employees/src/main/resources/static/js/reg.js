@@ -13,7 +13,7 @@ function validateLoginPass(login, password , email) {
 }
 
 async function regUser(data) {
-    return await fetch("/register", {
+    return await fetch("/registration", {
         method: "POST",
         headers: {
             'content-type': 'application/json'
@@ -27,10 +27,9 @@ async function reg() {
     let password = document.getElementById("password").value;
     let email = document.getElementById("email").value;
     let mes = document.getElementById("message");
-    if (email )
     let result = validateLoginPass(login, password , email);
     if (result === true) {
-        let data = {username: login, password: password,email:email};
+        let data = {login: login, password: password,email:email};
         let res = await regUser(data);
         if (res.ok) {
             window.location.replace(window.location.origin);

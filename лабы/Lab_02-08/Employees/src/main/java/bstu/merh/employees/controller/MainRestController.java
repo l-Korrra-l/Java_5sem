@@ -38,7 +38,7 @@ public class MainRestController {
     }
 
     @GetMapping("/login")
-    public @ResponseBody ModelAndView loginin(Model model) {
+    public @ResponseBody ModelAndView loginEmpty(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
@@ -66,7 +66,13 @@ public class MainRestController {
             throw new ControllerException("auth", e);
         }
     }
-    @PostMapping("/register")
+    @GetMapping("/registration")
+    public @ResponseBody ModelAndView registerEmpty(Model model) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("registration");
+        return modelAndView;
+    }
+    @PostMapping("/registration")
     public ResponseEntity<?> registerUser(@RequestBody RegistrationRequest registrationRequest)
     {
         //logger.debug("try to register user");
@@ -76,6 +82,7 @@ public class MainRestController {
             user.setPassword(registrationRequest.getPassword());
             user.setUsername(registrationRequest.getUsername());
             user.setEmail(registrationRequest.getEmail());
+            user.setActive(true);
             userService.saveUser(user);
             return new ResponseEntity<>(HttpStatus.OK);
         }

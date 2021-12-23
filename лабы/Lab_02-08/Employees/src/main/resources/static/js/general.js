@@ -49,7 +49,7 @@ async function reg() {
     let mes = document.getElementById("message");
     let result = validateLoginPass(login, password , email);
     if (result === true) {
-        let data = {login: login, password: password,email:email};
+        let data = {username: login, password: password,email:email};
         let res = await regUser(data);
         if (res.ok) {
             window.location.replace(window.location.origin);
@@ -66,7 +66,7 @@ async function login() {
     let login = document.getElementById("login").value;
     let password = document.getElementById("password").value;
     let mes = document.getElementById("message");
-    let data = {login: login, password: password};
+    let data = {username: login, password: password};
     let result = await logUser(data);
     if (result.ok) {
         let body = await result.text();

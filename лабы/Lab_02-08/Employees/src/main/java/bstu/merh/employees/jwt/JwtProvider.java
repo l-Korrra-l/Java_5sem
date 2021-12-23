@@ -19,15 +19,15 @@ import java.util.List;
 @Component
 @Log
 public class JwtProvider {
-    @Value("$(jwt.token.secret)")
+    @Value("${jwt.secret}")
     private String jwtSecret;
 
-    public String generateToken(String username) {
+    public String generateToken(String login) {
         Date date = Date.from(LocalDate.now().plusDays(15).atStartOfDay(ZoneId.systemDefault()).toInstant());
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(login)
                 .setExpiration(date)
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .signWith(SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
     }
 
@@ -44,14 +44,5 @@ public class JwtProvider {
     public String getUsernameFromToken(String token) {
         Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
         return claims.getSubject();
-    }
-
-    private List<String> getRolesNames(List<UserRole> userRoles){
-        List<String> result = new ArrayList<>();
-
-        userRoles.forEach(role -> {
-            result.add(role.getName().name());
-        });
-        return result;
     }
 }
