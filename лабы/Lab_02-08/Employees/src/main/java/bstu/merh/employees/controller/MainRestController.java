@@ -1,5 +1,6 @@
 package bstu.merh.employees.controller;
 
+import antlr.StringUtils;
 import bstu.merh.employees.Exceptions.ControllerException;
 import bstu.merh.employees.dto.AuthRequest;
 import bstu.merh.employees.dto.AuthResponse;
@@ -7,6 +8,7 @@ import bstu.merh.employees.dto.RegistrationRequest;
 import bstu.merh.employees.dto.UserResponse;
 import bstu.merh.employees.jwt.JwtProvider;
 import bstu.merh.employees.model.User;
+import bstu.merh.employees.service.MailSender;
 import bstu.merh.employees.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class MainRestController {
@@ -23,6 +26,8 @@ public class MainRestController {
     private UserService userService;
     @Autowired
     private JwtProvider jwtProvider;
+    @Autowired
+    private MailSender mailSender;
 
     @PostMapping("/users")
     public List<User> getUsers() throws ControllerException {
@@ -83,12 +88,35 @@ public class MainRestController {
             user.setUsername(registrationRequest.getUsername());
             user.setEmail(registrationRequest.getEmail());
             user.setActive(true);
+            user.setActivationCode(UUID.randomUUID().toString());
             userService.saveUser(user);
+            if(!user.getEmail().isEmpty()){
+                String message = String.format("Hello, %s!\n " +
+                        "Welcome to my Java project! Please, visit next link: http://localhost:8080/activate/%s",
+                        user.getUsername(), user.getActivationCode());
+                mailSender.sendMail(user.getEmail(), "Activation code", message);
+            }
             return new ResponseEntity<>(HttpStatus.OK);
         }
         else {
             return new ResponseEntity<>(HttpStatus.FOUND);
         }
+    }
+
+    @GetMapping("/activate/{code}")
+    public ModelAndView activate(Model model, @PathVariable String code) {
+        boolean isActivated = userService.activateUser(code);
+
+        if (isActivated) {
+            model.addAttribute("message", "User successfully activated");
+
+        } else {
+            model.addAttribute("message", "Activation code is not found!");
+        }
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
     }
 
     @PostMapping("/authorized")
