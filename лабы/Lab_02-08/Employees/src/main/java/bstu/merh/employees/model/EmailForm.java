@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "email_form")
+@Table(name = "emailForm")
 @Data
 @Getter
 @Setter
@@ -24,6 +24,6 @@ public class EmailForm {
 
     //list or cycle
     @ManyToMany
-    @JoinColumn(name = "employee_id")
-    private List<Employee> employee;
+    @JoinTable(joinColumns = @JoinColumn(name = "emailForm_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
+    private List<Employee> employees;
 }

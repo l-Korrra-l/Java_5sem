@@ -36,4 +36,6 @@ public class User {
 
     @Column
     private String email;
+
+    private String activationCode;
 }

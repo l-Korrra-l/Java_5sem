@@ -6,7 +6,7 @@ import javax.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "Employees")
+@Table(name = "employee")
 @Getter
 @Setter
 @Data
@@ -29,8 +29,8 @@ public class Employee {
     @Column(name = "salary")
     private Float salary;
 
-    @Column(name = "mail")
-    private String mail;
+    @Column(name = "email")
+    private String email;
 
 //    @OneToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "company_id")
@@ -43,7 +43,7 @@ public class Employee {
         this.lastName = last_name;
         this.age = age;
         this.salary = salary;
-        this.mail = mail;
+        this.email = mail;
     }
 
 

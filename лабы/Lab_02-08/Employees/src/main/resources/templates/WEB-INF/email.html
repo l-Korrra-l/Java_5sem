@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{../css/email.css}"/>
+</head>
+<body>
+<fieldset th:object="${emailForm}">
+  <legend>Select employees</legend>
+  <div class="checkbox" th:each="employee : ${allEmployees}">
+    <label>
+        <div th:if="${employee.email != null}">
+            <input  th:value="${employee.id}" th:field="*{employees}" type="checkbox" id="squaredThree"/>
+            <span  th:text="${employee.firstName + ' ' + employee.lastName + ': ' + employee.email}"/>
+        </div>
+        <div >
+        <input th:if="${employee.email == null}" th:value="${employee.id}" th:field="*{employees}" type="checkbox" id="squaredFour" onclick="return false;"/>
+       <span  th:if="${employee.email == null}" th:text="${employee.firstName + ' ' + employee.lastName + ': no email adress'}" style="color:gray;"/>
+        </div>
+    </label>
+  </div>
+    <button class="submit-btn" onclick="reg()" th:method="post">Send messages</button>
+</fieldset>
+</body>
+</html>
