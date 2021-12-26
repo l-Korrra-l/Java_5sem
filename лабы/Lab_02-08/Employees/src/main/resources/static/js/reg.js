@@ -29,7 +29,7 @@ async function reg() {
     let mes = document.getElementById("message");
     let result = validateLoginPass(login, password , email);
     if (result === true) {
-        let data = {login: login, password: password,email:email};
+        let data = {username: login, password: password,email:email};
         let res = await regUser(data);
         if (res.ok) {
             window.location.replace(window.location.origin);

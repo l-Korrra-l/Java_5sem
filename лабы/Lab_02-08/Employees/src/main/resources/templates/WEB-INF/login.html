@@ -1,97 +1,78 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"-->
-<!--      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Login</title>-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>-->
-<!--    <script type="text/javascript" src="../js/login.js" th:src="@{/js/login.js}"></script>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="form-structor">-->
-<!--    <div class="signup">-->
-<!--        <h2 class="form-title" id="signup">Log in</h2>-->
-<!--        <div class="form-holder"  th:action="@{/login}" method="post">-->
-<!--            <input id="logint" type="text" class="input" placeholder="Login" name="username"/>-->
-<!--            <input id="password" type="password" class="input" placeholder="Password" name="password"/>-->
-<!--        </div>-->
-<!--        <div th:if="${param.error}">-->
-<!--            Invalid username and password.-->
-<!--        </div>-->
-<!--        <div th:if="${param.logout}">-->
-<!--            You have been logged out.-->
-<!--        </div>-->
-<!--        <button type="submit" value="Sign In" class="submit-btn" onclick="login()">Log in</button>-->
-<!--        <a href="/"><button class="submit-btn">Home page</button></a>-->
-<!--    </div>-->
-<!--    <div class="login slide-up">-->
-<!--        <div class="center">-->
-<!--            <a href="/registration"><h2 class="form-title" id="login"><span>or</span>Sign up</h2></a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"-->
-<!--      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">-->
-<!--<head>-->
-<!--    <title>Login</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div th:if="${param.error}">-->
-<!--    Invalid username and password.-->
-<!--</div>-->
-<!--<div th:if="${param.logout}">-->
-<!--    You have been logged out.-->
-<!--</div>-->
-<!--<form th:action="@{/login}" method="post">-->
-<!--    <div><label> User Name : <input type="text" name="username"/> </label></div>-->
-<!--    <div><label> Password: <input type="password" name="password"/> </label></div>-->
-<!--    <div><input type="submit" value="Sign In"/></div>-->
-<!--</form>-->
-<!--<a href="/index"><button class="submit-btn">Home page</button></a>-->
-<!--<a href="/registration"><button class="submit-btn">Registration</button></a>-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" th:href="@{../css/style.css}">
-    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"-->
-    <!--          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{../css/login.css}"/>
+    <script type="text/javascript"  th:src="@{../js/login.js}"></script>
+    <script  th:src="@{../js/general.js}"></script>
 </head>
 <body>
-<script src="../static/js/index.js" th:src="@{../js/index.js}"></script>
-<script src="../static/js/elems.js" th:src="@{../js/elems.js}"></script>
-<script src="../static/js/api/user_rent_api.js" th:src="@{../js/api/user_rent_api.js}"></script>
-<script src="../static/js/api/scooter_api.js" th:src="@{../js/api/scooter_api.js}"></script>
-<script src="../static/js/api/user.js" th:src="@{../js/api/user.js}"></script>
-<script src="../static/js/admin.js" th:src="@{../js/admin.js}"></script>
-<script src="../static/js/general.js" th:src="@{../js/general.js}"></script>
-<script src="../static/js/user.js" th:src="@{../js/user.js}"></script>
-
-<h3>Auth</h3>
-<input type="text" id="login" placeholder="login"><br>
-<input type="password" id="password" placeholder="password">
-
-<button onclick="login()">Submit</button><br>
-<a href="/index">home</a><br>
-<a href="/registration">registration</a><br>
-<div id="message"></div>
+<div class="form-structor">
+    <div class="signup">
+        <h2 class="form-title" id="signup">Log in</h2>
+        <div class="form-holder"  th:action="@{/login}" method="post">
+            <input id="login" type="text" class="input" placeholder="Login" name="username"/>
+            <input id="password" type="password" class="input" placeholder="Password" name="password"/>
+        </div>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <div th:if="${message}">
+          <h1 th:utext="${message}" style="font-size: medium"/>
+        </div>
+        <button type="submit" value="Sign In" class="submit-btn" onclick="login()">Log in</button>
+        <a href="/"><button class="submit-btn">Home page</button></a>
+    </div>
+    <div class="login slide-up">
+        <div class="center">
+            <a href="/registration"><h2 class="form-title" id="logint"><span>or</span>Sign up</h2></a>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{../css/style.css}">-->
+<!--    &lt;!&ndash;    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"&ndash;&gt;-->
+<!--    &lt;!&ndash;          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">&ndash;&gt;-->
+<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"-->
+<!--            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"-->
+<!--            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"-->
+<!--            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<script src="../static/js/index.js" th:src="@{../js/index.js}"></script>-->
+<!--<script src="../static/js/elems.js" th:src="@{../js/elems.js}"></script>-->
+<!--<script src="../static/js/api/user_rent_api.js" th:src="@{../js/api/user_rent_api.js}"></script>-->
+<!--<script src="../static/js/api/scooter_api.js" th:src="@{../js/api/scooter_api.js}"></script>-->
+<!--<script src="../static/js/api/user.js" th:src="@{../js/api/user.js}"></script>-->
+<!--<script src="../static/js/admin.js" th:src="@{../js/admin.js}"></script>-->
+<!--<script src="../static/js/general.js" th:src="@{../js/general.js}"></script>-->
+<!--<script src="../static/js/user.js" th:src="@{../js/user.js}"></script>-->
+
+<!--<h3>Auth</h3>-->
+<!--<input type="text" id="login" placeholder="login"><br>-->
+<!--<input type="password" id="password" placeholder="password">-->
+
+<!--<button onclick="login()">Submit</button><br>-->
+<!--<a href="/index">home</a><br>-->
+<!--<a href="/registration">registration</a><br>-->
+<!--<div id="message"></div>-->
+<!--</body>-->
+<!--</html>-->
