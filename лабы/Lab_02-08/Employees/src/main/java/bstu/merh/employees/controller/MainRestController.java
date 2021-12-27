@@ -87,7 +87,7 @@ public class MainRestController {
             user.setPassword(registrationRequest.getPassword());
             user.setUsername(registrationRequest.getUsername());
             user.setEmail(registrationRequest.getEmail());
-            user.setActive(true);
+            user.setActive(false);
             user.setActivationCode(UUID.randomUUID().toString());
             userService.saveUser(user);
             if(!user.getEmail().isEmpty()){
