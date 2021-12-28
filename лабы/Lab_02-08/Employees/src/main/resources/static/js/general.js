@@ -9,7 +9,7 @@ function isTokenExist() {
 
 function logOut() {
     localStorage.removeItem('token');
-    window.location.replace(window.location.origin);
+    window.location.replace('/login');
 }
 
 async function isAuth() {
