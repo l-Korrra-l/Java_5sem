@@ -15,10 +15,10 @@ public class ControllerAdviceEx {
     public ResponseEntity<Object> handleControllerException(ControllerException exception, WebRequest request) {
         return new ResponseEntity<>(new ErrorResponse(exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
-//    @ExceptionHandler(value = Exception.class)
-//    public ModelAndView exception(Exception exception, WebRequest request) {
-//        ModelAndView modelAndView = new ModelAndView("error");
-//        modelAndView.addObject("errorMessage", Throwables.getRootCause(exception));
-//        return modelAndView;
-//    }
+    @ExceptionHandler(value = Exception.class)
+    public ModelAndView exception(Exception exception, WebRequest request) {
+        ModelAndView modelAndView = new ModelAndView("error");
+        modelAndView.addObject("errorMessage", Throwables.getRootCause(exception));
+        return modelAndView;
+    }
 }

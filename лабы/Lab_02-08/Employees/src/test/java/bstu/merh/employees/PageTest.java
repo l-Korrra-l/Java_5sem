@@ -34,15 +34,7 @@ public class PageTest {
         logger.info("running main page test");
         mockMvc.perform(get("/")).andDo(print()).andExpect(status().is2xxSuccessful()); }
 
-    @Controller
-    @RequestMapping("/tests")
-    public static class RestProcessingExceptionThrowingController {
-        @RequestMapping(value = "/exception", method = GET)
-        public @ResponseBody
-        String find() throws ControllerException {
-            throw new ControllerException("test exception");
-        }
-    }
+
     @Test
     public void testControllerAdvice() throws Exception
     {

@@ -136,4 +136,10 @@ public class MainRestController {
         }
     }
 
+//    for test
+    @GetMapping("/tests/exception")
+    public void RestProcessingExceptionThrowingController() throws ControllerException {
+        throw new ControllerException("test exception", new ControllerException("test exception"));
+    }
+
 }
