@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmailForm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +25,12 @@ public class EmailForm {
     private User user;
 
     //list or cycle
-    @ManyToMany
-    @JoinTable(joinColumns = @JoinColumn(name = "emailForm_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
-    private List<Employee> employees;
+//    @ManyToMany
+//    @JoinTable(joinColumns = @JoinColumn(name = "emailForm_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
+//    private List<Employee> employees;
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employees;
+
+
 }

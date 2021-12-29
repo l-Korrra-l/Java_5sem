@@ -15,15 +15,16 @@
       <input id="password" type="password" class="input" placeholder="Password" />
       <input id="email" type="email" class="input" placeholder="Email" />
     </div>
+    <h1 id="message" style="font-size: small"/>
     <div  th:if="${message}">
-      <h1 id="message" th:utext="${message}"/>
+      <h1 id="message1" th:utext="${message}"/>
     </div>
     <button class="submit-btn" onclick="reg()" th:method="post">Sign up</button>
     <a href="/index"><button class="submit-btn">Home page</button></a>
   </div>
   <div class="login slide-up">
     <div class="center">
-     <a href="/login"><h2 class="form-title" id="logint"><span>or</span>Log in</h2></a>
+     <a href="/login"><h2 class="form-title" id="logint"><span id="sp">or</span>Log in</h2></a>
     </div>
   </div>
 </div>

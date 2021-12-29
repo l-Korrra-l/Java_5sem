@@ -8,6 +8,7 @@
   <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
 </head>
 <body>
+<a href="/index">Go to home page</a>
 <div class="container" th:fragment="content">
   <div th:replace="fragments/alert :: alert (type='danger', message=${errorMessage})"> </div>
 </div>

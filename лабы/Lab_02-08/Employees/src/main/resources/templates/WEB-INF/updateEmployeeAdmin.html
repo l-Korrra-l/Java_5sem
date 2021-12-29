@@ -5,6 +5,15 @@
     <title>Title</title>
 </head>
 <body>
+<script src="../../static/js/api/employee_api.js" th:src="@{../js/api/employee_api.js}"></script>
+<script src="../../static/js/api/updateemployee_api.js" th:src="@{../js/api/updateemployee_api.js}"></script>
+<script>
+    window.onload = onUpdateEmployeeLoad;
+</script>
 
+Update employee
+<div id="employeeData"></div>
+<button onclick="updateEmployee()">Edit</button>
+<div id="errMes"></div>
 </body>
 </html>

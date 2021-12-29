@@ -29,6 +29,8 @@ public class JwtFilter extends GenericFilterBean {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+    private static  String currentUserUsername;
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         logger.info("do filter...");
@@ -36,6 +38,7 @@ public class JwtFilter extends GenericFilterBean {
         System.out.println("token: "+token);
         if (token != null && jwtProvider.validateToken(token)) {
             String userLogin = jwtProvider.getUsernameFromToken(token);
+            currentUserUsername = userLogin;
             CustomUserDetails customUserDetails = customUserDetailsService.loadUserByUsername(userLogin);
             UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
@@ -49,5 +52,9 @@ public class JwtFilter extends GenericFilterBean {
             return bearer.substring(7);
         }
         return null;
+    }
+
+    public static String getCurrentUserUsername(){
+        return currentUserUsername;
     }
 }

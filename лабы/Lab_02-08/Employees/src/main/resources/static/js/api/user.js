@@ -46,3 +46,32 @@ async function authorizedUser(token) {
         }
     });
 }
+
+async function adminDeleteUser(id){
+    let token = localStorage.getItem('token');
+    await deleteEmailByUserId(id, token);
+    await deleteUserById(id, token);
+    alert("Deleted");
+    window.location.replace("/index");
+
+}
+async function deleteUserById(id, token) {
+    if(confirm('Are u sure?')){
+        return await fetch(`/admin/deleteUserById/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'content-type': 'application/json'
+            },
+        });}
+}
+
+async function deleteEmailByUserId(id, token) {
+    return await fetch(`/admin/deleteEmailByUserId/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'content-type': 'application/json'
+        }
+    });
+}

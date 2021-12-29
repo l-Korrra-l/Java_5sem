@@ -2,7 +2,7 @@
 
 h1, h2, h3{
     font-family: Arial, sans-serif;
-    color: #524d77;
+    color: rgb(68, 95, 104);
     text-align: center;
 }
 
@@ -13,14 +13,14 @@ body{
 }
 
 button{
-    background-color: #8e8ca9;
+    background-color: rgb(140,167,181);
     margin-bottom: 5px;
     font-family: Arial, sans-serif;
     border-collapse: collapse;
-    border: 2px solid #524d77;
+    border: 2px solid rgb(93, 117, 128);
     border-radius: 25px;
     padding: 5px 5px;
-    text-decoration-color: #605bab;
+    text-decoration-color: rgb(69, 88, 97);
 }
 
 a{
@@ -64,13 +64,13 @@ input{
     margin-right: 25%;
     width: 50%;
     border-collapse: collapse;
-    border: 2px solid #524d77;
+    border: 2px solid rgb(93, 117, 128);
     border-radius: 25px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: #8e8ca9;
+    background-color: #93bacb;
 }
 
 .neededInfo{
@@ -91,7 +91,7 @@ input{
 
 .neededInfo table, tr, td, th{
     border-collapse: collapse;
-    border: 2px solid #524d77;
+    border: 2px solid rgb(93, 117, 128);
 }
 
 .neededInfo td{
@@ -110,18 +110,18 @@ table {
 th, td {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    color: black;
 }
 th {
     text-align: left;
-    background-color: #8e8ca9;
+    background-color: rgb(140,167,181);
     color: black;
 }
 thead th {
-    background-color: #55608f;
+    background-color: rgb(140,167,181);
 }
 tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.6);
 }
 tbody td {
     position: relative;
@@ -133,6 +133,6 @@ tbody td:hover:before {
     right: 0;
     top: -9999px;
     bottom: -9999px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.6);
     z-index: -1;
 }

@@ -27,12 +27,15 @@ async function reg() {
     let password = document.getElementById("password").value;
     let email = document.getElementById("email").value;
     let mes = document.getElementById("message");
+    let sp = document.getElementById("sp");
     let result = validateLoginPass(login, password , email);
     if (result === true) {
         let data = {username: login, password: password,email:email};
+        mes.innerHTML = "Wait...";
+        sp.innerHTML = "";
         let res = await regUser(data);
         if (res.ok) {
-            window.location.replace(window.location.origin);
+            mes.innerHTML = "Confirmation letter has been sent to email";
         } else {
             mes.innerHTML = "this user already exist";
         }

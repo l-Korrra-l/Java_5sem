@@ -19,7 +19,7 @@ async function login() {
         let body = await result.text();
         let info = JSON.parse(body);
         localStorage.setItem('token', info['token']);
-        window.location.replace(window.location.origin);
+        window.location.replace('/index');
     } else {
         mes.innerHTML = 'Error occured';
     }

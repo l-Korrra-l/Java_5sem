@@ -1,4 +1,4 @@
-
+//
 async function getAllEmployees(token) {
     return await fetch("/user/getAllEmployees", {
         method: "POST",
@@ -13,10 +13,7 @@ async function getAllEmployees(token) {
     });
 }
 
-//TODO
-//TODO /updateemployeeAdmin/
-//TODO adminDeleteEmployee
-//TODO adminDeleteUser
+//
 async function getAllEmployeesForAdmin(token) {
     return await fetch("/admin/getAllEmployees", {
         method: "POST",
@@ -32,7 +29,7 @@ async function getAllEmployeesForAdmin(token) {
 }
 
 
-
+//
 async function getEmployeeById(id, token) {
     return await fetch(`/user/getEmployeeById/${id}`, {
         method: 'GET',
@@ -47,7 +44,7 @@ async function getEmployeeById(id, token) {
         return data;
     });
 }
-
+//
 async function getEmployeeByIdForAdmin(id, token) {
     return await fetch(`/admin/getEmployeeById/${id}`, {
         method: 'GET',
@@ -61,56 +58,38 @@ async function getEmployeeByIdForAdmin(id, token) {
     }).then(function (data) {
         return data;
     });
-}//TODO
-async function userAddEmployee() {
-    let info;
-    let token=localStorage.getItem("token");
-    fetch('/getUserInfo',{
-        headers:{'Authorization': `Bearer ${token}`}
-    })
-        .then(result=>{
-            if(result.ok){
-                return result.json()
-            }
-        }).then(data=> {
-        info = {
-            name: data.name,
-            surname: data.surname,
-            email: data.email,
-            subject: document.getElementById("subject").value,
-            cost: document.getElementById("cost").value
-        };
-        createTutor(info);
-        alert("Ваше объявление успешно обработано");
-        window.location.replace(window.location.origin);
-    });
-
-}
-//TODO
-async function createEmployee(data) {
-    let token=localStorage.getItem("token");
-    return await fetch("/user/createTutor",{
-        method :'POST',
-        headers:{'Authorization': `Bearer ${token}`,
-            'Content-Type':'application/json'},
-        body:JSON.stringify(data)
-    });
 }
 
 
+async function adminDeleteEmployee(id){
+    let token = localStorage.getItem('token');
+    await deleteEmailByEmployeeId(id, token);
+    await deleteEmployeeById(id, token);
+    alert("Employee deleted");
+    window.location.replace('/index');
+
+}
 
 
-async function updateTutor() {
-    let token=localStorage.getItem("token");
-    return await fetch("/user/updateTutor", {
-        method: 'PUT',
+async function deleteEmailByEmployeeId(id, token) {
+    return await fetch(`/admin/deleteEmailByEmployeeId/${id}`, {
+        method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`,
             'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-
-        })
-
+        }
     });
 }
+
+async function deleteEmployeeById(id, token) {
+    if(confirm('Are u sure?')){
+        return await fetch(`/admin/deleteEmployeeById/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'content-type': 'application/json'
+            },
+        });}
+}
+
+

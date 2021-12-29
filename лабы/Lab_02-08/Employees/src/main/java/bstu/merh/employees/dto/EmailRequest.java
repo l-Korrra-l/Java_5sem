@@ -12,4 +12,6 @@ import java.util.List;
 @Setter
 public class EmailRequest {
     private List<String> employeeList;
+    public Long employee;
+    public String message;
 }

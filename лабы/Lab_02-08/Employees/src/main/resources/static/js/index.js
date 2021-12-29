@@ -18,6 +18,7 @@ async function generateSearch() {
         <th>Age</th>
         <th>Salary</th>
         <th>Email</th>
+        <th></th>
     </tr>`;
         for (let i = 0; i < listProject.length; i++) {
             if (inputResult.toUpperCase() === listProject[i]['firstName'].toUpperCase()||
@@ -59,6 +60,8 @@ async function generateSearchForAdmin() {
         <th>Age</th>
         <th>Salary</th>
         <th>Email</th>
+        <th></th>
+        <th></th>
     </tr>`;
         for (let i = 0; i < listProject.length; i++) {
             if (inputResult.toUpperCase() === listProject[i]['firstName'].toUpperCase()||

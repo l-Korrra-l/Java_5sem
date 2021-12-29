@@ -10,6 +10,9 @@ import bstu.merh.employees.jwt.JwtProvider;
 import bstu.merh.employees.model.User;
 import bstu.merh.employees.service.MailSender;
 import bstu.merh.employees.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -133,6 +136,19 @@ public class MainRestController {
             return new UserResponse(user.getId(), user.getUsername(), user.getRole().getName());
         } catch (Exception e) {
             throw new ControllerException("getUser", e);
+        }
+    }
+
+    @Operation(summary = "Delete user by id (for admin only)")
+    @ApiResponse(responseCode = "200", description = "User is deleted")
+    @DeleteMapping("/admin/deleteUserById/{id}")
+    public ResponseEntity<?> deleteTutorById(@PathVariable(name="id")Long id)throws ControllerException {
+        try {
+            userService.delete(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (ServiceException e) {
+            throw new ControllerException(e);
+
         }
     }
 
