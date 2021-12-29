@@ -21,10 +21,25 @@ async function generateSearch() {
         <th></th>
     </tr>`;
         for (let i = 0; i < listProject.length; i++) {
-            if (inputResult.toUpperCase() === listProject[i]['firstName'].toUpperCase()||
-                inputResult.toUpperCase() === listProject[i]['lastName'].toUpperCase()||
-                inputResult.toUpperCase() === listProject[i]['age'].toUpperCase()||
-                inputResult.toUpperCase() === listProject[i]['salary'].toUpperCase()+' '+listProject[i]['email'].toUpperCase()) {
+            if (inputResult.toUpperCase() === listProject[i]['firstName']?.toUpperCase()||
+                inputResult.toUpperCase() === listProject[i]['lastName']?.toUpperCase()||
+                inputResult.toUpperCase() === listProject[i]['age']||
+                inputResult.toUpperCase() === listProject[i]['salary']||
+                inputResult.toUpperCase() === listProject[i]['email']?.toUpperCase()) {
+                list.innerHTML+=`<tr>
+                <td>${listProject[i]['firstName']}</td>
+                <td>${listProject[i]['lastName']}</td>
+                <td>${listProject[i]['age']}</td>
+                <td>${listProject[i]['salary']}</td>
+                <td>${listProject[i]['email']}</td>
+                <td><a href="/messagePage/+${listProject[i]['id']}">Write to</a></td>
+                </tr>
+                `;}
+        }
+        for (let i = 0; i < listProject.length; i++) {
+            if (listProject[i]['firstName'].toUpperCase()?.includes(inputResult.toUpperCase())||
+                listProject[i]['lastName'].toUpperCase()?.includes(inputResult.toUpperCase())||
+                listProject[i]['email'].toUpperCase()?.includes(inputResult.toUpperCase()) ) {
                 list.innerHTML+=`<tr>
                 <td>${listProject[i]['firstName']}</td>
                 <td>${listProject[i]['lastName']}</td>
@@ -64,10 +79,25 @@ async function generateSearchForAdmin() {
         <th></th>
     </tr>`;
         for (let i = 0; i < listProject.length; i++) {
-            if (inputResult.toUpperCase() === listProject[i]['firstName'].toUpperCase()||
-                inputResult.toUpperCase() === listProject[i]['lastName'].toUpperCase()||
-                inputResult.toUpperCase() === listProject[i]['age'].toUpperCase()||
-                inputResult.toUpperCase() === listProject[i]['salary'].toUpperCase()+' '+listProject[i]['email'].toUpperCase()){
+            if (inputResult.toUpperCase() === listProject[i]['firstName']?.toUpperCase()||
+                inputResult.toUpperCase() === listProject[i]['lastName']?.toUpperCase()||
+                inputResult.toUpperCase() === listProject[i]['age']||
+                inputResult.toUpperCase() === listProject[i]['salary']||
+                inputResult.toUpperCase() ===listProject[i]['email']?.toUpperCase()){
+                list.innerHTML+=`<tr>
+                <td>${listProject[i]['firstName']}</td>
+                <td>${listProject[i]['lastName']}</td>
+                <td>${listProject[i]['age']}</td>
+                <td>${listProject[i]['salary']}</td>
+                <td>${listProject[i]['email']}</td>
+                <td><a href="/updateemployeeAdmin/+${listProject[i]['id']}">Edit</a></td>
+                <td><button onclick="adminDeleteEmployee(${listProject[i]['id']})">Delete</button></td>
+                </tr>`;}
+        }
+        for (let i = 0; i < listProject.length; i++) {
+            if (listProject[i]['firstName']?.toUpperCase().includes(inputResult.toUpperCase())||
+                listProject[i]['lastName']?.toUpperCase().includes(inputResult.toUpperCase())||
+                listProject[i]['email']?.toUpperCase().includes(inputResult.toUpperCase()) ){
                 list.innerHTML+=`<tr>
                 <td>${listProject[i]['firstName']}</td>
                 <td>${listProject[i]['lastName']}</td>
@@ -120,9 +150,25 @@ async function generateUserSearchForAdmin(){
         <th>Role</th>
     </tr>`;
         for (let i = 0; i < listProject.length; i++) {
-            if (inputResult.toUpperCase() === listProject[i]['username'].toUpperCase()||
-                inputResult.toUpperCase() === listProject[i]['password'].toUpperCase()||
-                inputResult.toUpperCase() === listProject[i]['email'].toUpperCase()+' '+listProject[i]['role'].toUpperCase())
+            if (inputResult.toUpperCase() === listProject[i]['username']?.toUpperCase()||
+                inputResult.toUpperCase() === listProject[i]['password']?.toUpperCase()||
+                inputResult.toUpperCase() === listProject[i]['email']?.toUpperCase()
+                )
+            {
+                list.innerHTML+=`<tr>
+                <td>${listProject[i]['username']}</td>
+                <td>${listProject[i]['password']}</td>
+                <td>${listProject[i]['email']}</td>
+                <td>${listProject[i].role.name}</td>
+                <td><a href="/updateuserAdmin/+${listProject[i]['id']}">Edit</a></td>
+                <td><button onclick="adminDeleteUser(${listProject[i]['id']})">Delete</button></td>
+                </tr>`;}
+        }
+        for (let i = 0; i < listProject.length; i++) {
+            if (listProject[i]['username']?.toUpperCase().includes(inputResult.toUpperCase())||
+                listProject[i]['password']?.toUpperCase().includes(inputResult.toUpperCase())||
+                listProject[i]['email']?.toUpperCase().includes(inputResult.toUpperCase())||
+                listProject[i]['role']?.name.toUpperCase().includes(inputResult.toUpperCase()))
             {
                 list.innerHTML+=`<tr>
                 <td>${listProject[i]['username']}</td>
@@ -158,8 +204,8 @@ async function loadAdminIndex(){
     let userContainer=document.getElementById('allUsersContainer');
     let searchButton=await button( generateSearchForAdmin,'Search');
     let searchUserButton=await button( generateUserSearchForAdmin,'Search');
-    let createHref=await a( 'addemployeeadmin','Add employee');
-    let createHrefUser=await a( 'addemployeeadmin','Add user');
+    // let createHref=await a( 'addemployeeadmin','Add employee');
+    // let createHrefUser=await a( 'addemployeeadmin','Add user');
     search.appendChild(searchButton);
     searchUser.appendChild(searchUserButton);
     employeeContainer.appendChild(createHref);
