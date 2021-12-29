@@ -70,6 +70,23 @@ public class MainController {
         return modelAndView;
     }
 
+    @PostMapping("/")
+    public @ResponseBody ModelAndView addNewEmployeedef (@RequestParam String first_name
+            , @RequestParam String last_name, @RequestParam Integer age, @RequestParam String email, Model model) {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index");
+        Employee n = new Employee();
+        n.setFirstName(first_name);
+        n.setLastName(last_name);
+        n.setEmail(email);
+        n.setAge(age);
+        emplRepo.save(n);
+        model.addAttribute("employees", emplRepo.findAll());
+        log.info("/allempl was called");
+        return modelAndView;
+    }
     @PostMapping("filter")
     public @ResponseBody ModelAndView addNewEmployee (@RequestParam String filter,  Model model) {
 

@@ -69,7 +69,7 @@
 <script src="../../static/js/api/user_rent_api.js" th:src="@{../js/api/user_rent_api.js}"></script>
 <script src="../../static/js/api/user.js" th:src="@{../js/api/user.js}"></script>
 <script src="../../static/js/api/order_api.js" th:src="@{../js/api/order_api.js}"></script>
-<script src="../../static/js/api/tutor_api.js" th:src="@{../js/api/tutor_api.js}"></script>
+<script src="../../static/js/api/tutor_api.js" th:src="@{../js/api/employee_api.js}"></script>
 <script src="../../static/js/admin.js" th:src="@{../js/admin.js}"></script>
 <script src="../../static/js/general.js" th:src="@{../js/general.js}"></script>
 <script src="../../static/js/user.js" th:src="@{../js/user.js}"></script>
@@ -77,6 +77,32 @@
     window.onload = onIndexLoad;
 </script>
 
+<div class="container">
+<!--&lt;!&ndash;      users&ndash;&gt;-->
+      <h1>New employee:</h1>
+      <form method="POST">
+          <p>first_name: <input type="text" name="first_name" placeholder="a"/> </p>
+          <p>last name: <input type="text" name="last_name" placeholder="a"/> </p>
+          <p>age: <input type="number" name="age" placeholder="1"/> </p>
+         <p>email: <input type="email" name="email" placeholder="mail@gmail.com"/> </p>
+          <input type="submit" value="Add" />
+</form>
+ </div>
+  <div class="container">
+      <table class ="container" border="1">
+          <tr>
+              <th><h1>First name</h1></th>
+              <th><h1>Last name</h1></th>
+              <th><h1>Age</h1></th>
+          </tr>
+          <tr th:each ="employee : ${employees}">
+              <td th:utext="${employee.firstName}">...</td>
+              <td th:utext="${employee.lastName}">...</td>
+              <td th:utext="${employee.age}">...</td>
+          </tr>
+
+      </table>
+  </div>
 
 <div>
     <button onclick="logOut()">Logout</button>

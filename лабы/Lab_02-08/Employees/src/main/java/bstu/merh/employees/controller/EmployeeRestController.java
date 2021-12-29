@@ -8,7 +8,9 @@ import bstu.merh.employees.model.EmailForm;
 import bstu.merh.employees.model.Employee;
 import bstu.merh.employees.repository.EmailFormRepository;
 import bstu.merh.employees.repository.EmployeeRepository;
+import bstu.merh.employees.service.EmployeeService;
 import bstu.merh.employees.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +27,15 @@ public class EmployeeRestController {
     @Autowired
     private UserService userService;
     @Autowired
+    private EmployeeService employeeService;
+    @Autowired
     private JwtProvider jwtProvider;
     @Autowired
     private EmployeeRepository emplRepo;
     @Autowired
     private EmailFormRepository emailRepo;
+
+//    private static final Logger logger = Logger.getLogger(MainRestController.class);
 
     @PostMapping("/emailForm")
     public ResponseEntity<?> addEmail(@RequestBody EmailRequest emailRequest) throws ControllerException {
@@ -62,5 +68,26 @@ public class EmployeeRestController {
         model.addAttribute("allEmployees", emplRepo.findAll());
         model.addAttribute("emailForm", new EmailForm());
         return modelAndView;
+    }
+
+    @PostMapping("/admin/getAllEmployees")
+    public List<Employee> getEmployeesForAdmin() throws ControllerException {
+        try {
+//            logger.debug("getting all users");
+            return employeeService.getAll();
+        } catch (Exception e) {
+//            logger.error("error get all users");
+            throw new ControllerException("getEmployees", e);
+        }
+    }
+    @PostMapping("/user/getAllEmployees")
+    public List<Employee> getEmployeesForUser() throws ControllerException {
+        try {
+//            logger.debug("getting all users");
+            return employeeService.getAll();
+        } catch (Exception e) {
+//            logger.error("error get all users");
+            throw new ControllerException("getEmployees", e);
+        }
     }
 }
