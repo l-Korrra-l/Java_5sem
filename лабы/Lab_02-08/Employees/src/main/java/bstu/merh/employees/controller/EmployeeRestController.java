@@ -11,6 +11,9 @@ import bstu.merh.employees.repository.EmailFormRepository;
 import bstu.merh.employees.repository.EmployeeRepository;
 import bstu.merh.employees.service.EmployeeService;
 import bstu.merh.employees.service.UserService;
+import bstu.merh.employees.validator.EmployeeValidator;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.Logger;
 import org.hibernate.service.spi.ServiceException;
@@ -19,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,6 +48,8 @@ public class EmployeeRestController {
     private EmployeeRepository emplRepo;
     @Autowired
     private EmailFormRepository emailRepo;
+    @Autowired
+    private EmployeeValidator employeeValidator;
 
 //    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeRestController.class);
 
@@ -111,9 +118,11 @@ public class EmployeeRestController {
         }
     }
 
+
     @GetMapping("/admin/getEmployeeById/{id}")
     public ResponseEntity<?> getEmployeeByIdForAdmin(@PathVariable(name="id") Long id)throws ControllerException {
         Employee stuff = null;
+        EmployeeRequest t = new EmployeeRequest();
         try {
             stuff = employeeService.getById(id);
             return new ResponseEntity<>(stuff,HttpStatus.OK);
@@ -123,10 +132,10 @@ public class EmployeeRestController {
     }
 
     @GetMapping(value = { "/"})
-    public Response indexhome(Model model) throws URISyntaxException {
-        log.info("/ was called");
-        URI uri = new URI("http://localhost:8080/index");
-        return Response.status(Response.Status.MOVED_PERMANENTLY).location(uri).build();
+    public ModelAndView indexhome(Model model) throws URISyntaxException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
     }
 
     @GetMapping(value = { "/index"})
@@ -140,7 +149,7 @@ public class EmployeeRestController {
 
     @PostMapping("/index")
     public @ResponseBody ModelAndView addNewEmployee (@RequestParam String first_name
-            , @RequestParam String last_name, @RequestParam Integer age, @RequestParam Float salary, @RequestParam String email, Model model) {
+            , @RequestParam String last_name, @RequestParam Integer age, @RequestParam Float salary, @RequestParam String email, Model model,  BindingResult bindingResult) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         ModelAndView modelAndView = new ModelAndView();
@@ -151,12 +160,32 @@ public class EmployeeRestController {
         n.setEmail(email);
         n.setAge(age != null ? age : 0);
         n.setSalary(salary != null ? salary : 0);
+        employeeValidator.validate(n, bindingResult);
         emplRepo.save(n);
         model.addAttribute("employees", emplRepo.findAll());
         log.info("/index was called");
         return modelAndView;
     }
-
+    @PostMapping("/addEmployee")
+    public ResponseEntity<?> addNewEmployee (@RequestBody @Validated EmployeeRequest empl, BindingResult bindingResult) throws ControllerException {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
+        try {
+            log.info("/index was called");
+        Employee n = new Employee();
+        n.setSalary(empl.getSalary());
+        n.setAge(empl.getAge());
+        n.setFirstName(empl.getFirstName());
+        n.setEmail(empl.getEmail());
+        n.setLastName(empl.getLastName());
+        employeeValidator.validate(empl, bindingResult);
+        emplRepo.save(n);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (ServiceException e) {
+            log.error("Error after admin/updateEmployee called...");
+            throw new ControllerException(e);
+        }
+    }
     @PutMapping("/admin/updateEmployee")
     public ResponseEntity<?> updateEmployee(@RequestBody EmployeeRequest employeeRequest)throws ControllerException {
         try {

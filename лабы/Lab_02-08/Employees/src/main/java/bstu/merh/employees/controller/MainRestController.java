@@ -92,6 +92,7 @@ public class MainRestController {
             user.setEmail(registrationRequest.getEmail());
             user.setActive(false);
             user.setActivationCode(UUID.randomUUID().toString());
+
             userService.saveUser(user);
             if(!user.getEmail().isEmpty()){
                 String message = String.format("Hello, %s!\n " +

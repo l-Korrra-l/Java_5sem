@@ -1,3 +1,11 @@
+let token=localStorage.getItem("token");
+function val(){
+    let lage = document.getElementById('age').value;
+    if (lage > 150 || lage < 0)
+    {document.getElementById('mess').innerHTML="error"
+        return false;}
+    else return true;
+}
 //------------------message page
 async function generateSearch() {
     let token = localStorage.getItem('token');
@@ -290,16 +298,39 @@ async function loadUsersForAdmin(){
 
 
 
-
-
-function rateChangeOption(){
-    let rateSelect = document.getElementById('rateFilter');
-    let selectedOption = rateSelect.options[rateSelect.selectedIndex];
-    if(selectedOption.label==='Сначала низкие'){
-        let sortedRows = Array.from(allEmployees.rows)
-            .slice(1)
-            .sort((rowA, rowB) => rowA.cells[5].innerHTML > rowB.cells[5].innerHTML ? 1 : -1);
-
-        allEmployees.tBodies[0].append(sortedRows);
+async function createEmployee(){
+    let fname = document.getElementById('first_name').value;
+    let lname = document.getElementById('last_name').value;
+    let lage = document.getElementById('age').value;
+    let lsalary = document.getElementById('salary').value;
+    let lemail = document.getElementById('email').value;
+    let mes = document.getElementById('mess');
+    let data = {firstName: fname, lastName: lname,age:lage, salary: lsalary, email: lemail};
+    if (val())
+    {let res = await crEmployee(data);}
+    if (res.ok) {
+        mes.innerHTML = "Ok";
+    } else {
+        mes.innerHTML = "error";
     }
+}
+async function crEmployee(data) {
+    return await fetch("/addEmployee", {
+        method: "POST",
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(data=>{}).catch((error)=>document.getElementById('mess').innerHTML="error");
+}
+
+
+
+function val(){
+    let lage = document.getElementById('age').value;
+    if (lage > 150 || lage < 0)
+    {document.getElementById('mess').innerHTML="error"
+        return false;}
+    else return true;
 }
